@@ -8,4 +8,8 @@ public interface iDES {
     
     String toBit(String plain);
     
+    String IP(String plain);
+    
+    String addNULL(String plain);
+    
 }

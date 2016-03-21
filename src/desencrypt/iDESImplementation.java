@@ -31,6 +31,10 @@ public class iDESImplementation implements iDES{
             61, 53, 45, 37, 29, 21, 13, 5,
             63, 55, 47, 39, 31, 23, 15, 7
         };
+        for(int i=0;i<table.length;i++){
+            char temp = plain.charAt(table[i]);
+            plainIP = plainIP+temp;
+        }
         return plainIP;
     }
 

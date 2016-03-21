@@ -8,13 +8,15 @@ import java.math.BigInteger;
 public class iDESImplementation implements iDES{
 
     public String toBit(String plain) {
-        String plaintext;
-        for(int i=0;i<plain.length();i++){
-            char x = plain.charAt(i);
-            
-            String temp = new BigInteger(x.).toString(2);
+        String temp = new BigInteger(plain.getBytes()).toString(2);
+        String plaintext="";
+        int tempLength=temp.length();
+        while (tempLength<8) {
+            plaintext+="0";
+            tempLength++;
         }
-        return
+        plaintext+=temp;
+        return plaintext;
     }
     
 }

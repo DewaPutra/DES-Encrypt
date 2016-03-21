@@ -8,10 +8,15 @@ public class DESEncrypt {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String plain = new BigInteger(in.nextLine().getBytes()).toString(2);
+        String temp = new BigInteger(in.nextLine().getBytes()).toString(2);
+        String plain="0";
+        int tempLength=temp.length();
+        while (tempLength<7) {
+            plain+="0";
+            tempLength++;
+        }
+        plain+=temp;
         System.out.println(plain + " " + plain.length());
-        System.out.println("64 I : "+ plain.substring(0, 63)+ " "+plain.substring(0, 63).length());
-        System.out.println("64 II : "+ plain.substring(64, plain.length())+ " "+plain.substring(64, plain.length()).length());
-    }
-    
+        
+    }    
 }

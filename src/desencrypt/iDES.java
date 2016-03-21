@@ -12,4 +12,8 @@ public interface iDES {
     
     String addNULL(String plain);
     
+    String EP(String plain);
+    
+    String Permutation(String plain);
+    
 }

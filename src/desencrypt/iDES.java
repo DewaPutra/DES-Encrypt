@@ -16,4 +16,6 @@ public interface iDES {
     
     String Permutation(String plain);
     
+    String[] dev8(String Plain);
+    
 }

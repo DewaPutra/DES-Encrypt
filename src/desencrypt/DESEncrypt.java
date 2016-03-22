@@ -22,14 +22,12 @@ public class DESEncrypt {
             if (counter8==9) {
                 counter8=1;
                 index++;
-            }
-                
-            
+            }            
         }
-        System.out.println("Hello World!");
-//        String plain = c.toBit();
-//        
-//        System.out.println(plain + " " + plain.length());
+        string8 = c.dev8(input);
+        for(int i=0;i<string8.length;i++){
+            System.out.println(string8[i]+" "+string8[i].length());
+        }
         
     }
 }

@@ -18,7 +18,7 @@ public class iDESImplementation implements iDES{
         plaintext+=temp;
         return plaintext;
     }
-
+    
     public String IP(String plain) {
         String plainIP="";
         final int[] table = { 
@@ -67,7 +67,23 @@ public class iDESImplementation implements iDES{
 
     public String Permutation(String plain) {
         String newPlain="";
-        
+        return newPlain;
+    }
+
+    public String[] dev8(String plain) {
+        int idx = 0;
+        int temp=plain.length()/8, temp2 = plain.length()%8;
+        if(temp2>0) temp+=1;
+        String newPlain[] =  new String[temp];
+        int begin=0, end=8;
+        for(int i=0;i<temp;i++){
+            newPlain[idx]=plain.substring(begin, end);
+            begin = end;
+            end = end+8;
+            if (end>plain.length()) end=plain.length();
+            idx++;
+        }
+        return newPlain;
     }
     
     

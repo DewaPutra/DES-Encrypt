@@ -26,6 +26,7 @@ public class DESEncrypt {
                 
             
         }
+        System.out.println("Hello World!");
 //        String plain = c.toBit();
 //        
 //        System.out.println(plain + " " + plain.length());

@@ -79,9 +79,9 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
 
-    public String[] dev8(String plain) {
+    public String[] devn(int n, String plain) {
         int idx = 0;
-        int temp=plain.length()/8, temp2 = plain.length()%8;
+        int temp=plain.length()/n, temp2 = plain.length()%n;
         if(temp2>0) temp+=1;
         String newPlain[] =  new String[temp];
         int begin=0, end=8;
@@ -129,5 +129,50 @@ public class iDESImplementation implements iDES{
         }
        return newPlain;
     }
+
+    public String PC1(String plain) {
+        String newPlain="";
+        int tableLeft[] = {57, 49, 41, 33, 25, 17,  9,
+                            1, 58, 50, 42, 34, 26, 18,
+                           10,  2, 59, 51, 43, 35, 27,
+                           19, 11,  3, 60, 52, 44, 36};
+        int tableRight[] ={63, 55, 47, 39, 31, 23, 15,
+                            7, 62, 54, 46, 38, 30, 22,
+                           14,  6, 61, 53, 45, 37, 29,
+                           21, 13,  5, 28, 20, 12, 4};
+        for(int i=0;i<tableLeft.length;i++){
+            char temp = plain.charAt(tableLeft[i]);
+            newPlain = newPlain+temp;
+        }
+        for(int i=tableLeft.length;i<tableRight.length+tableLeft.length;i++){
+            char temp = plain.charAt(tableRight[i]);
+            newPlain = newPlain+temp;
+        }
+        return newPlain;
+    }
+
+    public String leftShift(int idx, String plain) {
+        String newPlain=plain;
+        for(int i=0;i<idx;i++){
+            newPlain = newPlain.substring(1, newPlain.length())+newPlain.charAt(0);
+        }
+        return newPlain;
+    }
+
+    public String XOR(String plain, String key) {
+        String newPlain="";
+        char temp, temp1, temp2;
+        for( int i=0; i<plain.length() ; i++)
+        {
+            temp = plain.charAt(i);
+            temp1 = key.charAt(i);
+            if(temp==temp1) {
+                temp2='0';
+            } else temp2='1';
+            newPlain+=temp2;
+        }
+        return newPlain;
+    }
+   
 }
 

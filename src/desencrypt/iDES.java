@@ -16,10 +16,16 @@ public interface iDES {
     
     public String Permutation(String plain);
     
-    public String[] dev8(String plain);
+    public String[] devn(int n, String plain);
     
     public String FinP(String plain);
     
     public String PC2(String plain);
+    
+    public String PC1(String plain);
+    
+    public String leftShift(int idx, String plain);
+    
+    public String XOR(String plain, String key);
     
 }

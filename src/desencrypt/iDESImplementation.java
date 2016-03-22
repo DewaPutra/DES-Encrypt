@@ -19,7 +19,7 @@ public class iDESImplementation implements iDES{
         return plaintext;
     }
     
-    public String IP(String plain) {
+    public String InP(String plain) {
         String plainIP="";
         final int[] table = { 
             58, 50, 42, 34, 26, 18, 10, 2,
@@ -48,7 +48,7 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
     
-    public String EP(String plain) {
+    public String ExP(String plain) {
         String newPlain="";
         int [] table ={ 32, 1, 2, 3, 4, 5,
                         4 , 5, 6, 7, 8, 9,
@@ -64,9 +64,18 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-
+    
     public String Permutation(String plain) {
         String newPlain="";
+        int table[] ={ 16,  7, 20, 21, 29, 12, 28, 17,
+                        1, 15, 23, 26,	5, 18, 31, 10,
+                        2,  8, 24, 14, 32, 27,	3,  9,
+                       19, 13, 30,  6, 22, 11,	4, 25};
+        
+        for(int i=0;i<table.length;i++){
+            char temp = plain.charAt(table[i]);
+            newPlain = newPlain+temp;
+        }
         return newPlain;
     }
 
@@ -85,7 +94,40 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-    
-    
-    
+
+    public String FinP(String plain) { 
+        String newPlain="";
+        int table[]={40, 8, 48,	16, 56,	24, 64,	32,
+                     39, 7, 47,	15, 55,	23, 63,	31,
+                     38, 6, 46,	14, 54,	22, 62,	30,
+                     37, 5, 45,	13, 53,	21, 61,	29,
+                     36, 4, 44,	12, 52,	20, 60,	28,
+                     35, 3, 43,	11, 51,	19, 59,	27,
+                     34, 2, 42,	10, 50,	18, 58,	26,
+                     33, 1, 41,	9,  49,	17, 57,	25};
+        for(int i=0;i<table.length;i++){
+            char temp = plain.charAt(table[i]);
+            newPlain = newPlain+temp;
+        }
+        return newPlain;
+        
+    }
+
+   public String PC2(String plain) {
+       String newPlain="";
+       int table[] ={14, 17, 11, 24,  1,  5,
+                      3, 28, 15,  6, 21, 10,
+                     23, 19, 12,  4, 26,  8,
+                     16,  7, 27, 20, 13,  2,
+                     41, 52, 31, 37, 47, 55,
+                     30, 40, 51, 45, 33, 48,
+                     44, 49, 39, 56, 34, 53,
+                     46, 42, 50, 36, 29, 32};
+       for(int i=0;i<table.length;i++){
+            char temp = plain.charAt(table[i]);
+            newPlain = newPlain+temp;
+        }
+       return newPlain;
+    }
 }
+

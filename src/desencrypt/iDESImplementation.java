@@ -240,9 +240,15 @@ public class iDESImplementation implements iDES{
     }
     
     public String[] keyGen(String key) {
+        int idx[] = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
         String[] newPlain = new String[16];
+        String pc1 = PC1(toBit(key));
+        for(int i=0;i<16;i++){
+            String left = leftShift(idx[i],pc1.substring(0, 28));
+            String right =  leftShift(idx[i],pc1.substring(28, pc1.length()));
+            newPlain[i] = PC2(left+right);
+        }
         return newPlain;
-        
     }
 
     public String DES(String plain, String key) {

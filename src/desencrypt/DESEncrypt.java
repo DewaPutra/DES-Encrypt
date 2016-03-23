@@ -14,7 +14,8 @@ public class DESEncrypt {
         String input = in.nextLine();
         String in2 = in.nextLine();
         String out = c.XOR(input, in2);
-        System.out.println(out+" "+ out.length());
         
+        int[][] S = {{1,2,3,4,5,6,7,8,9},{9,2,1,2,4,4,5,5}};
+        System.out.println(S[0][1]);
     }
 }

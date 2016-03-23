@@ -176,6 +176,10 @@ public class iDESImplementation implements iDES{
 
     public String Sbox(String plain) {
         String newPlain="";
+        String dev6[] = devn(6,plain);
+        for(int i=0;i<dev6.length;i++){
+            
+        }
         return newPlain;
     }
    

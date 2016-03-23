@@ -9,10 +9,9 @@ public class DESEncrypt {
 
     public static void main(String[] args) {
         iDESImplementation c = new iDESImplementation();
-        String[] string8 = new String[]{};
+//        String[] string8 = new String[]{};
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
-<<<<<<< HEAD
         String[] string8 = new String[8];
         int counter8=1;
         int counterLength=0;
@@ -25,29 +24,24 @@ public class DESEncrypt {
             int tempLength = input.length()-counterLength;
             if (counter8==9 || (tempLength<8 && counterLength==input.length())) {
                 string8[index] = temp;
-//                String af= temp;
-//                System.out.println(string8[index]);
                 counter8=1;
                 index++;
                 temp="";
             }
         }
         
+        String plain="";
         //Kurang variable untuk nyimpen plain yang udah diubah
         for (int x=0;x<index;x++) {
             System.out.println(string8[x]);
-            String plain = c.toBit(string8[x]);
+            plain = c.toBit(string8[x]);
             System.out.println(plain + " " + plain.length());
         }
+//        String in2 = in.nextLine();
+//        String out = c.XOR(input, in2);
+//        System.out.println(out+" "+ out.length());
         
-        
-        
-        
-=======
-        String in2 = in.nextLine();
-        String out = c.XOR(input, in2);
-        System.out.println(out+" "+ out.length());
->>>>>>> 575d6de68fc82e0b5105597c770e55b67f5d690a
-        
+        String newPlain =  c.Sbox(plain);
+        System.out.println(newPlain + " " + newPlain.length());
     }
 }

@@ -28,4 +28,6 @@ public interface iDES {
     
     public String XOR(String plain, String key);
     
+    public String Sbox(String plain);
+    
 }

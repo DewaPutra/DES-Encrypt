@@ -113,7 +113,7 @@ public class iDESImplementation implements iDES{
         
     }
 
-   public String PC2(String plain) {
+    public String PC2(String plain) {
        String newPlain="";
        int table[] ={14, 17, 11, 24,  1,  5,
                       3, 28, 15,  6, 21, 10,
@@ -171,6 +171,11 @@ public class iDESImplementation implements iDES{
             } else temp2='1';
             newPlain+=temp2;
         }
+        return newPlain;
+    }
+
+    public String Sbox(String plain) {
+        String newPlain="";
         return newPlain;
     }
    

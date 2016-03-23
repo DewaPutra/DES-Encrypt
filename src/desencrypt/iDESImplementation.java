@@ -84,11 +84,11 @@ public class iDESImplementation implements iDES{
         int temp=plain.length()/n, temp2 = plain.length()%n;
         if(temp2>0) temp+=1;
         String newPlain[] =  new String[temp];
-        int begin=0, end=8;
+        int begin=0, end=n;
         for(int i=0;i<temp;i++){
             newPlain[idx]=plain.substring(begin, end);
             begin = end;
-            end = end+8;
+            end = end+n;
             if (end>plain.length()) end=plain.length();
             idx++;
         }

@@ -44,4 +44,5 @@ public class DESEncrypt {
         String newPlain =  c.Sbox(plain);
         System.out.println(newPlain + " " + newPlain.length());
     }
+
 }

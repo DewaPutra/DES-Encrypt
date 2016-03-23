@@ -84,11 +84,11 @@ public class iDESImplementation implements iDES{
         int temp=plain.length()/n, temp2 = plain.length()%n;
         if(temp2>0) temp+=1;
         String newPlain[] =  new String[temp];
-        int begin=0, end=8;
+        int begin=0, end=n;
         for(int i=0;i<temp;i++){
             newPlain[idx]=plain.substring(begin, end);
             begin = end;
-            end = end+8;
+            end = end+n;
             if (end>plain.length()) end=plain.length();
             idx++;
         }
@@ -219,25 +219,31 @@ public class iDESImplementation implements iDES{
                     } };
         String temp[] = devn(6, plain);
         String newPlain="";
-        
-        
         for(int i=0;i<temp.length;i++){
             String newTemp = temp[i];
             String CL ="";
-            CL += newTemp.charAt(0)+newTemp.charAt(5);
-//            CL += newTemp.charAt(0);
-//            CL += newTemp.charAt(5);
+//            CL += newTemp.charAt(0);//+newTemp.charAt(5);
+            CL += newTemp.charAt(0);
+            CL += newTemp.charAt(5);
             String CR = "";
-            CR += temp[i].substring(1, 4);
+            CR += temp[i].substring(1, 5);
             System.out.println(newTemp+" "+CL+" "+CR);
             int row = Integer.parseInt(CL, 2);
             int col = Integer.parseInt(CR, 2);
-            newPlain += "-";
+//            newPlain += "-";
 //            System.out.println("dari sbox : "+newPlain);
-            newPlain+=S[i][8*row+col];
+//            newPlain+=S[i][8*row+col];
+            String tempPlain = Integer.toBinaryString(S[i][8*row+col]);
+            int tplength = tempPlain.length();
+            while (tplength<4) {
+                newPlain+="0";
+                tplength++;
+            }
+            newPlain+=tempPlain;
+            System.out.println(newPlain);
+        
         }
         return newPlain;
     }
-   
 }
 

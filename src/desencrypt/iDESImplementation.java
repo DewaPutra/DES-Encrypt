@@ -222,28 +222,35 @@ public class iDESImplementation implements iDES{
         for(int i=0;i<temp.length;i++){
             String newTemp = temp[i];
             String CL ="";
-//            CL += newTemp.charAt(0);//+newTemp.charAt(5);
             CL += newTemp.charAt(0);
             CL += newTemp.charAt(5);
             String CR = "";
             CR += temp[i].substring(1, 5);
-            System.out.println(newTemp+" "+CL+" "+CR);
             int row = Integer.parseInt(CL, 2);
             int col = Integer.parseInt(CR, 2);
-//            newPlain += "-";
-//            System.out.println("dari sbox : "+newPlain);
-//            newPlain+=S[i][8*row+col];
             String tempPlain = Integer.toBinaryString(S[i][8*row+col]);
             int tplength = tempPlain.length();
             while (tplength<4) {
                 newPlain+="0";
                 tplength++;
             }
-            newPlain+=tempPlain;
-            System.out.println(newPlain);
-        
+            newPlain+=tempPlain;        
         }
         return newPlain;
+    }
+    
+    public String[] keyGen(String key) {
+        String[] newPlain = new String[16];
+        return newPlain;
+        
+    }
+
+    public String DES(String plain, String key) {
+        String chiper="";
+        String left = plain.substring(0, 32);
+        String right = plain.substring(32, plain.length());
+        
+        return chiper;
     }
 }
 

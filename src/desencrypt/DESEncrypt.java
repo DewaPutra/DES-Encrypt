@@ -15,7 +15,6 @@ public class DESEncrypt {
     }
 
     public static void main(String[] args) {
-        iDESImplementation c = new iDESImplementation();
 //        String[] string8 = new String[]{};
         Scanner in = new Scanner(System.in);
     }    

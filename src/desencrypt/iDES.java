@@ -30,4 +30,9 @@ public interface iDES {
     
     public String Sbox(String plain);
     
+    public String DES(String plain, String key);
+    
+    public String[] keyGen(String key);
+    
+    
 }

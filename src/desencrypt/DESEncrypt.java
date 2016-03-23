@@ -9,8 +9,10 @@ public class DESEncrypt {
 
     public static void main(String[] args) {
         iDESImplementation c = new iDESImplementation();
+        String[] string8 = new String[]{};
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
+<<<<<<< HEAD
         String[] string8 = new String[8];
         int counter8=1;
         int counterLength=0;
@@ -41,6 +43,11 @@ public class DESEncrypt {
         
         
         
+=======
+        String in2 = in.nextLine();
+        String out = c.XOR(input, in2);
+        System.out.println(out+" "+ out.length());
+>>>>>>> 575d6de68fc82e0b5105597c770e55b67f5d690a
         
     }
 }

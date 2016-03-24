@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Arya/Documents/NetBeansProjects/DES-Encrypt/src/desencrypt/iDESImplementation.java</file>
-            <file>file:/C:/Users/Arya/Documents/NetBeansProjects/DES-Encrypt/src/desencrypt/DESEncrypt.java</file>
-=======
-            <file>file:/D:/My%20Files/ITS/Semester%206/KIJ/Tugas%20DES/DES-Encrypt/src/desencrypt/DESEncrypt.java</file>
-            <file>file:/D:/My%20Files/ITS/Semester%206/KIJ/Tugas%20DES/DES-Encrypt/src/desencrypt/iDESImplementation.java</file>
-            <file>file:/D:/My%20Files/ITS/Semester%206/KIJ/Tugas%20DES/DES-Encrypt/src/desencrypt/iDES.java</file>
->>>>>>> 1b053ce54353bd62be71340a9d271d59bc2ddac8
+            <file>file:/E:/ITS/KULIAH/SEMESTER%206/KIJ/DESEncrypt/src/desencrypt/iDES.java</file>
+            <file>file:/E:/ITS/KULIAH/SEMESTER%206/KIJ/DESEncrypt/src/desencrypt/iDESImplementation.java</file>
+            <file>file:/E:/ITS/KULIAH/SEMESTER%206/KIJ/DESEncrypt/src/desencrypt/DESEncrypt.java</file>
         </group>
     </open-files>
 </project-private>

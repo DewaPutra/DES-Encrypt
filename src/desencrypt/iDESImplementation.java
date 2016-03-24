@@ -73,7 +73,7 @@ public class iDESImplementation implements iDES{
                        19, 13, 30,  6, 22, 11,	4, 25};
         
         for(int i=0;i<table.length;i++){
-            char temp = plain.charAt(table[i]);
+            char temp = plain.charAt(table[i]-1);
             newPlain = newPlain+temp;
         }
         return newPlain;
@@ -106,7 +106,7 @@ public class iDESImplementation implements iDES{
                      34, 2, 42,	10, 50,	18, 58,	26,
                      33, 1, 41,	9,  49,	17, 57,	25};
         for(int i=0;i<table.length;i++){
-            char temp = plain.charAt(table[i]);
+            char temp = plain.charAt(table[i]-1);
             newPlain = newPlain+temp;
         }
         return newPlain;
@@ -124,7 +124,7 @@ public class iDESImplementation implements iDES{
                      44, 49, 39, 56, 34, 53,
                      46, 42, 50, 36, 29, 32};
        for(int i=0;i<table.length;i++){
-            char temp = plain.charAt(table[i]);
+            char temp = plain.charAt(table[i]-1);
             newPlain = newPlain+temp;
         }
        return newPlain;
@@ -144,7 +144,7 @@ public class iDESImplementation implements iDES{
             char temp = plain.charAt(tableLeft[i]);
             newPlain = newPlain+temp;
         }
-        for(int i=tableLeft.length;i<tableRight.length+tableLeft.length;i++){
+        for(int i=0;i<tableRight.length;i++){
             char temp = plain.charAt(tableRight[i]);
             newPlain = newPlain+temp;
         }
@@ -175,7 +175,6 @@ public class iDESImplementation implements iDES{
     }
     
     public String Sbox(String plain) {
-        System.out.println("dari sbox : "+plain);
         int[][] S = { {
                         14, 4,  13, 1,  2,  15, 11, 8,  3,  10, 6,  12, 5,  9,  0,  7,
                         0,  15, 7,  4,  14, 2,  13, 1,  10, 6,  12, 11, 9,  5,  3,  8,
@@ -243,6 +242,7 @@ public class iDESImplementation implements iDES{
         int idx[] = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
         String[] newPlain = new String[16];
         String pc1 = PC1(toBit(key));
+        String temp;
         for(int i=0;i<16;i++){
             String left = leftShift(idx[i],pc1.substring(0, 28));
             String right =  leftShift(idx[i],pc1.substring(28, pc1.length()));
@@ -253,10 +253,32 @@ public class iDESImplementation implements iDES{
 
     public String DES(String plain, String key) {
         String chiper="";
+        String Key[] = keyGen(key);
         String left = plain.substring(0, 32);
         String right = plain.substring(32, plain.length());
-        
+        for(int i=0;i<16;i++){
+            String temp=left;
+            left = right;
+            right = XOR(F(right,Key[i]), temp);
+        }
+        chiper = left + right;
+        chiper = FinP(chiper);
         return chiper;
+    }
+
+    public String F(String plain, String key) {
+        String newPlain = Permutation(Sbox(XOR(ExP(plain),key)));
+        return newPlain;
+    }
+
+    public String convertChiper(String chiper) {
+        String conv ="";
+        String dev8[] = devn(8,chiper);
+        for(int i=0;i<dev8.length;i++){
+            int temp = Integer.parseInt(dev8[i], 2);
+            conv += Character.toString((char)temp);
+        }
+        return conv;
     }
 }
 

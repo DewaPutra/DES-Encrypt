@@ -34,5 +34,7 @@ public interface iDES {
     
     public String[] keyGen(String key);
     
+    public String F(String plain, String key);
     
+    public String convertChiper(String chiper);
 }

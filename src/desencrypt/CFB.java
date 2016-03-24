@@ -38,12 +38,16 @@ public class CFB {
         String key = in.nextLine();
         System.out.print("Message: ");
         String plain = in.nextLine();
-        
+        System.out.print(plain.length());
         String cfbResult[] = CFBmain(IV, key, plain);
+        String finChip="";
         for(int i=0;i<cfbResult.length;i++){
             int j=i+1;
             System.out.println(j+" "+cfbResult[i]+" "+cfbResult[i].length());
             System.out.println("  "+c.convertChiper(cfbResult[i]));
+            finChip += c.convertChiper(cfbResult[i]);
+            
         }
+        System.out.println(finChip);
     }
 }

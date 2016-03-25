@@ -217,6 +217,7 @@ public class iDESImplementation implements iDES{
                         2,  1,  14, 7,  4,  10, 8,  13, 15, 12, 9,  0,  3,  5,  6,  11
                     } };
         String temp[] = devn(6, plain);
+        System.out.println(plain+" "+plain.length());
         String newPlain="";
         for(int i=0;i<temp.length;i++){
             String newTemp = temp[i];
@@ -227,13 +228,22 @@ public class iDESImplementation implements iDES{
             CR += temp[i].substring(1, 5);
             int row = Integer.parseInt(CL, 2);
             int col = Integer.parseInt(CR, 2);
-            String tempPlain = Integer.toBinaryString(S[i][8*row+col]);
+            int add=0;
+            if(row==0) add=0; 
+            else if(row==1) add=15;
+            else if(row==2) add=30;
+            else if(row==3) add=45;
+            System.out.println("row: "+row+" col: "+col+" add: "+add);
+            String tempPlain = Integer.toBinaryString(S[i][row+col+add]);
+            int s=add+row+col;
+            System.out.println("S["+i+"]["+s+"]=> "+S[i][s]);
             int tplength = tempPlain.length();
             while (tplength<4) {
                 newPlain+="0";
                 tplength++;
             }
-            newPlain+=tempPlain;        
+            newPlain+=tempPlain;   
+            System.out.println("in Sbox method");
         }
         return newPlain;
     }
@@ -251,11 +261,12 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
 
-    public String DES(String plain, String key) {
+    public String DESen(String plain, String key) {
+        String cplain = InP(plain);
         String chiper="";
         String Key[] = keyGen(key);
-        String left = plain.substring(0, 32);
-        String right = plain.substring(32, plain.length());
+        String left = cplain.substring(0, 32);
+        String right = cplain.substring(32, cplain.length());
         for(int i=0;i<16;i++){
             String temp=left;
             left = right;
@@ -279,6 +290,24 @@ public class iDESImplementation implements iDES{
             conv += Character.toString((char)temp);
         }
         return conv;
+    }
+
+   public String DESde(String chiper, String key) {
+        String cChiper = InP(chiper);
+        String plain="";
+        String Key[] = keyGen(key);
+        String left = cChiper.substring(0, 32);
+        String right = cChiper.substring(32, cChiper.length());
+        int j=16;
+        for(int i=0;i<16;i++){
+            j--;
+            String temp=left;
+            left = right;
+            right = XOR(F(right,Key[j]), temp);
+        }
+        plain = left + right;
+        plain = FinP(plain);
+        return plain;
     }
 }
 

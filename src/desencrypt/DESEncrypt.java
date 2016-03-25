@@ -9,31 +9,32 @@ public class DESEncrypt {
     
     
     public static void main(String[] args) {
+        
         iDES c = new iDESImplementation();
+        
         Scanner in = new Scanner(System.in);
+        System.out.print("Plaintext: ");
         String plain = in.nextLine();
         String dev[] = c.devn(8, plain);
+        System.out.print("Key: ");
         String key = in.nextLine();
-//        plain = c.addNULL(c.toBit(plain));
         key = c.addNULL(c.toBit(key));
         String chipertext = "";
+        String conv="";
         for (int i=0;i<dev.length;i++){
-//            int devLength=dev[i].length();
-//            while (devLength<8) {
-//                dev[i]+="0";
-//                devLength++;
-//            }
+            int j=i+1;
             dev[i]=c.addNULL(c.toBit(dev[i]));
-            System.out.println(dev[i].length()+" "+key.length());
-            String chiper = c.DES(dev[i], key);
-            String conv = c.convertChiper(chiper);
-            System.out.println("Convert : "+conv);
-            chipertext+=conv;
-            System.out.println("Chipertext : "+chipertext);
-            
+            System.out.println("plain "+j+" in bit: "+dev[i]+" "+dev[i].length());
+            String chiper = c.DESen(dev[i], key);
+            System.out.println("    chiper dev["+j+"]: "+chiper+" "+chiper.length());
+            conv = c.convertChiper(chiper);
+            System.out.println("    converted chiper dev["+j+"]: "+conv+" "+conv.length());
+            String decrypt = c.DESde(chiper, key);
+            System.out.println("    decrypt dev["+j+"]: "+decrypt+" "+decrypt.length());
+            conv = c.convertChiper(decrypt);
+            System.out.println("    converted decrypt dev["+j+"]: "+conv+" "+conv.length());
+            chipertext+=conv;           
         }
-//        System.out.println(plain.length()+" "+key.length());
-        
         
     }    
     

@@ -11,7 +11,6 @@ public class DESEncrypt {
     public static void main(String[] args) {
         
         iDES c = new iDESImplementation();
-        
         Scanner in = new Scanner(System.in);
         System.out.print("Plaintext: ");
         String plain = in.nextLine();
@@ -34,8 +33,7 @@ public class DESEncrypt {
             conv = c.convertChiper(decrypt);
             System.out.println("    converted decrypt dev["+j+"]: "+conv+" "+conv.length());
             chipertext+=conv;           
-        }
-        
+        }     
     }    
     
 }

@@ -141,11 +141,12 @@ public class iDESImplementation implements iDES{
                            14,  6, 61, 53, 45, 37, 29,
                            21, 13,  5, 28, 20, 12, 4};
         for(int i=0;i<tableLeft.length;i++){
-            char temp = plain.charAt(tableLeft[i]);
+            char temp = plain.charAt(tableLeft[i]-1);
             newPlain = newPlain+temp;
         }
+        
         for(int i=0;i<tableRight.length;i++){
-            char temp = plain.charAt(tableRight[i]);
+            char temp = plain.charAt(tableRight[i]-1);
             newPlain = newPlain+temp;
         }
         return newPlain;
@@ -217,7 +218,6 @@ public class iDESImplementation implements iDES{
                         2,  1,  14, 7,  4,  10, 8,  13, 15, 12, 9,  0,  3,  5,  6,  11
                     } };
         String temp[] = devn(6, plain);
-        System.out.println(plain+" "+plain.length());
         String newPlain="";
         for(int i=0;i<temp.length;i++){
             String newTemp = temp[i];
@@ -228,22 +228,13 @@ public class iDESImplementation implements iDES{
             CR += temp[i].substring(1, 5);
             int row = Integer.parseInt(CL, 2);
             int col = Integer.parseInt(CR, 2);
-            int add=0;
-            if(row==0) add=0; 
-            else if(row==1) add=15;
-            else if(row==2) add=30;
-            else if(row==3) add=45;
-            System.out.println("row: "+row+" col: "+col+" add: "+add);
-            String tempPlain = Integer.toBinaryString(S[i][row+col+add]);
-            int s=add+row+col;
-            System.out.println("S["+i+"]["+s+"]=> "+S[i][s]);
+            String tempPlain = Integer.toBinaryString(S[i][16*row+col]);
             int tplength = tempPlain.length();
             while (tplength<4) {
                 newPlain+="0";
                 tplength++;
             }
             newPlain+=tempPlain;   
-            System.out.println("in Sbox method");
         }
         return newPlain;
     }
@@ -251,11 +242,12 @@ public class iDESImplementation implements iDES{
     public String[] keyGen(String key) {
         int idx[] = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
         String[] newPlain = new String[16];
-        String pc1 = PC1(toBit(key));
-        String temp;
+        String pc1 = PC1(key);
+        String temp=pc1;
         for(int i=0;i<16;i++){
-            String left = leftShift(idx[i],pc1.substring(0, 28));
-            String right =  leftShift(idx[i],pc1.substring(28, pc1.length()));
+            String left = leftShift(idx[i],temp.substring(0, 28));
+            String right =  leftShift(idx[i],temp.substring(28, temp.length()));
+            temp=left+right;
             newPlain[i] = PC2(left+right);
         }
         return newPlain;
@@ -267,16 +259,27 @@ public class iDESImplementation implements iDES{
         String Key[] = keyGen(key);
         String left = cplain.substring(0, 32);
         String right = cplain.substring(32, cplain.length());
+        String temp=left, temp2=left;
         for(int i=0;i<16;i++){
-            String temp=left;
+            temp=left;
             left = right;
             right = XOR(F(right,Key[i]), temp);
         }
-        chiper = left + right;
+        chiper = right+left;
         chiper = FinP(chiper);
         return chiper;
     }
-
+    
+    public String transpose(String plain) {
+        String newPlain = "";
+        for (int i=0;i<4;i++) {
+            for (int j=28+i;j>=0;j-=4) {
+                newPlain += plain.charAt(j);
+            }
+        }
+        return newPlain;
+    }
+    
     public String F(String plain, String key) {
         String newPlain = Permutation(Sbox(XOR(ExP(plain),key)));
         return newPlain;
@@ -305,7 +308,7 @@ public class iDESImplementation implements iDES{
             left = right;
             right = XOR(F(right,Key[j]), temp);
         }
-        plain = left + right;
+        plain = right + left;
         plain = FinP(plain);
         return plain;
     }

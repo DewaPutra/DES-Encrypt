@@ -9,9 +9,9 @@ public class iDESImplementation implements iDES{
 
     public String toBit(String plain) {
         String temp = new BigInteger(plain.getBytes()).toString(2);
-        String plaintext="0";
+        String plaintext="";
         int tempLength=temp.length();
-        while (tempLength<7) {
+        while (tempLength<8) {
             plaintext+="0";
             tempLength++;
         }

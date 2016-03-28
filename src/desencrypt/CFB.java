@@ -31,6 +31,7 @@ public class CFB {
         iDES c = new iDESImplementation();        
         String chiper[]= c.devn(8, chipertext);
         String plain[]= new String[chiper.length];
+        
         String init = c.toBit(IV);
         if(init.length()<64) init = c.addNULL(init);
         String key = c.toBit(Key);
@@ -38,13 +39,11 @@ public class CFB {
         
         for(int i=0;i<chiper.length;i++){
             String p = c.toBit(chiper[i]);
-            System.out.println("p1: "+p +" "+p.length());
+            System.out.println(p.length());
             if(p.length()<64) p = c.addNULL(p);
-            System.out.println("p2: "+p +" "+p.length());
-            String desResult = c.DESde(init, key);
+            String desResult = c.DESen(init, key);
             plain[i]=c.XOR(desResult, p);
             init = p;
-            System.out.println("init: "+init +" "+init.length());
         }
         return plain;
     }
@@ -60,10 +59,15 @@ public class CFB {
         
         //Encrypting
         String cfbResult[] = CFBEncrypt(IV, key, plain);
+        
         for(int i=0;i<cfbResult.length;i++){
-            int j=i+1;
-            System.out.println(j+" "+cfbResult[i]+" "+cfbResult[i].length());
+            //int j=i+1;
             finChip += c.convertChiper(cfbResult[i]);
+            String d8[] = c.devn(8, cfbResult[i]);
+            System.out.println(cfbResult[i]);
+            for(int j=0;j<d8.length;j++){
+                System.out.println("Chiper8-bit: "+d8[j] +" "+ d8[j].length());
+            }
         }
         System.out.println("Final Chiper: "+finChip +" "+ finChip.length());
     
@@ -72,7 +76,6 @@ public class CFB {
         finChip = "";
         for(int i=0;i<cfbResultDecrypt.length;i++){
             int j=i+1;
-            System.out.println(j+" "+cfbResultDecrypt[i]+" "+cfbResultDecrypt[i].length());
             finChip += c.convertChiper(cfbResultDecrypt[i]);
         }
         System.out.println("Final Plain : "+finChip +" "+ finChip.length());

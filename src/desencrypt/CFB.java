@@ -1,7 +1,7 @@
 
 package desencrypt;
 
-import static desencrypt.DESEncrypt.dataset;
+//import static desencrypt.DESEncrypt.dataset;
 import java.util.*;
 import java.io.*;
 import desencrypt.iDES;
@@ -86,14 +86,15 @@ public class CFB {
         String d[] = dataset(path);
         String IV = "", key = "", plain="";
         String finChip="";
-        
+        int l=0;
         for(int k=0;k<d.length;k+=3){
             int j=k;
+            l++;
             IV=d[j];
             key=d[j+1];
             plain=d[j+2];
             key = c.toBit(key);
-            
+            System.out.println("CFB dataset "+l);
             //Encrypting
             String cfbResult[] = CFBEncrypt(IV, key, plain);
             String finChipBit = "";
@@ -103,7 +104,7 @@ public class CFB {
                 finChip += c.convertChiper(cfbResult[i]);
                 String d8[] = c.devn(8, cfbResult[i]);
             }
-            System.out.println("Final Chiper: "+finChip +" "+ finChip.length());
+            System.out.println("Final Chiper: "+finChip);
 
             //Decrypting
             String cfbResultDecrypt[] = CFBDecrypt(IV, key, finChipBit);
@@ -111,7 +112,7 @@ public class CFB {
             for(int i=0;i<cfbResultDecrypt.length;i++){
                 finChip += c.convertChiper(cfbResultDecrypt[i]);
             }
-            System.out.println("Final Plain : "+finChip +" "+ finChip.length());
+            System.out.println("Final Plain : "+finChip);
         }
     }
 }

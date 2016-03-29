@@ -8,23 +8,27 @@ import desencrypt.iDESImplementation;
 public class DESEncrypt {
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         iDES c = new iDESImplementation();
-        Scanner in = new Scanner(System.in);
-        System.out.print("Plaintext: ");
-        String plain = in.nextLine();
-        System.out.print("Key: ");
-        String key = in.nextLine();
-        key = c.addNULL(c.toBit(key));
+        BufferedReader br = null;
+        try {
+            String sCurrentLine;
+            br = new BufferedReader(new FileReader("E:\\ITS\\KULIAH\\SEMESTER 6\\KIJ\\DESEncrypt\\datasetcoba.txt"));
+            while ((sCurrentLine = br.readLine()) != null) {
+                System.out.println(sCurrentLine);
+            }
+	} catch (IOException e) {
+            e.printStackTrace();
+	} finally {
+            try {
+		if (br != null)br.close();
+            } catch (IOException ex) {
+		ex.printStackTrace();
+            }
+	}
         
-        //simple 8-bit plain and key
-        String chipertext = c.DESen(c.addNULL(c.toBit(plain)), key);
-        String conv=c.convertChiper(chipertext);
-        System.out.println("Chipertext: "+conv);
-        String plaintext = c.DESde(chipertext, key);
-        conv=c.convertChiper(plaintext);
-        System.out.println("Plaintext: "+conv);
+        
         
         //more than 8-bit plain and 8-bit key
 //        for (int i=0;i<dev.length;i++){

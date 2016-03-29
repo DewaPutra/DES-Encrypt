@@ -27,24 +27,20 @@ public class DESEncrypt {
 		ex.printStackTrace();
             }
 	}
-        
-        
-        
-        //more than 8-bit plain and 8-bit key
+    
+//        String dev[]= c.devn(8, plain);
+//        String conv="";
+//        String chiperfix="", plainfix="";
 //        for (int i=0;i<dev.length;i++){
-//            int j=i+1;
 //            dev[i]=c.addNULL(c.toBit(dev[i]));
-//            System.out.println("plain "+j+" in bit: "+dev[i]+" "+dev[i].length());
 //            String chiper = c.DESen(dev[i], key);
-//            System.out.println("    chiper dev["+j+"]: "+chiper+" "+chiper.length());
 //            conv = c.convertChiper(chiper);
-//            System.out.println("    converted chiper dev["+j+"]: "+conv+" "+conv.length());
+//            chiperfix+=conv;
 //            String decrypt = c.DESde(chiper, key);
-//            System.out.println("    decrypt dev["+j+"]: "+decrypt+" "+decrypt.length());
 //            conv = c.convertChiper(decrypt);
-//            System.out.println("    converted decrypt dev["+j+"]: "+conv+" "+conv.length());
-//            chipertext+=conv;           
+//            plainfix+=conv;           
 //        }     
+//        System.out.println("Chiper: "+chiperfix+" Plain: "+plainfix);
     }    
     
 }

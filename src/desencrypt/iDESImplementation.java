@@ -6,19 +6,24 @@ import java.io.*;
 import java.math.BigInteger;
 
 public class iDESImplementation implements iDES{
-
+    
+    //Convert plaintext to bit
     public String toBit(String plain) {
-        String temp = new BigInteger(plain.getBytes()).toString(2);
         String plaintext="";
-        int tempLength=temp.length();
-        while (tempLength<8) {
-            plaintext+="0";
-            tempLength++;
+        String dev8[] = devn(1,plain);
+        for (int i=0;i<dev8.length;i++) {
+            String temp = new BigInteger(dev8[i].getBytes()).toString(2);
+            int tempLength=temp.length();
+            while (tempLength<8) {
+                plaintext+="0";
+                tempLength++;
+            }
+            plaintext+=temp;
         }
-        plaintext+=temp;
         return plaintext;
     }
     
+    //Initial Permutation
     public String InP(String plain) {
         String plainIP="";
         final int[] table = { 
@@ -38,6 +43,7 @@ public class iDESImplementation implements iDES{
         return plainIP;
     }
     
+    //Add padding
     public String addNULL(String plain) {
         String newPlain=plain;
         int temp= plain.length();
@@ -48,6 +54,7 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
     
+    //Expansion
     public String ExP(String plain) {
         String newPlain="";
         int [] table ={ 32, 1, 2, 3, 4, 5,
@@ -65,6 +72,7 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
     
+    //Permutation after s-box
     public String Permutation(String plain) {
         String newPlain="";
         int table[] ={ 16,  7, 20, 21, 29, 12, 28, 17,
@@ -78,7 +86,8 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-
+    
+    //Divide plaintext to n character
     public String[] devn(int n, String plain) {
         int idx = 0;
         int temp=plain.length()/n, temp2 = plain.length()%n;
@@ -94,7 +103,8 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-
+    
+    //Final Permutation
     public String FinP(String plain) { 
         String newPlain="";
         int table[]={40, 8, 48,	16, 56,	24, 64,	32,
@@ -112,7 +122,8 @@ public class iDESImplementation implements iDES{
         return newPlain;
         
     }
-
+    
+    //Permutation Choice 2
     public String PC2(String plain) {
        String newPlain="";
        int table[] ={14, 17, 11, 24,  1,  5,
@@ -129,7 +140,8 @@ public class iDESImplementation implements iDES{
         }
        return newPlain;
     }
-
+    
+    //Permutation Choice 2
     public String PC1(String plain) {
         String newPlain="";
         int tableLeft[] = {57, 49, 41, 33, 25, 17,  9,
@@ -151,7 +163,8 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-
+    
+    //Shifting the key
     public String leftShift(int idx, String plain) {
         String newPlain=plain;
         for(int i=0;i<idx;i++){
@@ -159,7 +172,8 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-
+    
+    //XOR plain and key
     public String XOR(String plain, String key) {
         String newPlain="";
         char temp, temp1, temp2;
@@ -175,6 +189,7 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
     
+    //S-Box
     public String Sbox(String plain) {
         int[][] S = { {
                         14, 4,  13, 1,  2,  15, 11, 8,  3,  10, 6,  12, 5,  9,  0,  7,
@@ -239,6 +254,7 @@ public class iDESImplementation implements iDES{
         return newPlain;
     }
     
+    //Generate all sub-key
     public String[] keyGen(String key) {
         int idx[] = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
         String[] newPlain = new String[16];
@@ -252,7 +268,8 @@ public class iDESImplementation implements iDES{
         }
         return newPlain;
     }
-
+    
+    //Des Block Encryption
     public String DESen(String plain, String key) {
         String cplain = InP(plain);
         String chiper="";
@@ -270,21 +287,13 @@ public class iDESImplementation implements iDES{
         return chiper;
     }
     
-    public String transpose(String plain) {
-        String newPlain = "";
-        for (int i=0;i<4;i++) {
-            for (int j=28+i;j>=0;j-=4) {
-                newPlain += plain.charAt(j);
-            }
-        }
-        return newPlain;
-    }
-    
+    //Chiper Function 
     public String F(String plain, String key) {
         String newPlain = Permutation(Sbox(XOR(ExP(plain),key)));
         return newPlain;
     }
 
+    //Convert Bit to String(text)
     public String convertChiper(String chiper) {
         String conv ="";
         String dev8[] = devn(8,chiper);
@@ -294,8 +303,9 @@ public class iDESImplementation implements iDES{
         }
         return conv;
     }
-
-   public String DESde(String chiper, String key) {
+    
+    //Chiper Decryption
+    public String DESde(String chiper, String key) {
         String cChiper = InP(chiper);
         String plain="";
         String Key[] = keyGen(key);

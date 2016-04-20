@@ -43,28 +43,24 @@ public class DESEncrypt {
     public static void main(String[] args) throws IOException {
         
         iDES c = new iDESImplementation();
-        String path ="E:\\ITS\\KULIAH\\SEMESTER 6\\KIJ\\DESEncrypt\\datasetcoba.txt";
-        String d[] = dataset(path);
-        String iv="", plain="", key="";
-        for(int k=0;k<d.length;k+=3){
-            int j=k;
-            iv=d[j];
-            key=d[j+1];
-            plain=d[j+2];
+        String iv="", plain="", key="s3rvf1l3";
             key = c.toBit(key);
-            String dev[]= c.devn(8, plain);
+            String dev[]= c.devn(8, "adder(2,5)");
             String conv="";
             String chiperfix="", plainfix="";
             for (int i=0;i<dev.length;i++){
                 dev[i]=c.addNULL(c.toBit(dev[i]));
                 String chiper = c.DESen(dev[i], key);
+                iv+=chiper;
+                System.out.println(chiper+" "+ chiper.length());
                 conv = c.convertChiper(chiper);
                 chiperfix+=conv;
                 String decrypt = c.DESde(chiper, key);
                 conv = c.convertChiper(decrypt);
                 plainfix+=conv;           
-            }     
-            System.out.println("Chiper: "+chiperfix+" Plain: "+plainfix);
-        }
+            
+            }
+            System.out.println(plainfix);
+            System.out.println(iv.length());
     }    
 }

@@ -1,7 +1,6 @@
 
 package desencrypt;
 
-//import static desencrypt.DESEncrypt.dataset;
 import java.util.*;
 import java.io.*;
 import desencrypt.iDES;
